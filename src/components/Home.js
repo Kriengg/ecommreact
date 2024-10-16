@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import '../css/Home.css'; // Import the CSS file
+import { useNavigate } from 'react-router-dom';
+import '../css/Home.css';
 import sampleProducts from '../data/sampleProducts'; // Import sample products
-import heroImage from '../images/hero-image.jpg'; // Import the image
+import heroImage from '../images/hero-image.jpg';
 
-function Home({ cart = [], setCart }) {
+function Home({ cart, setCart }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const navigate = useNavigate();
 
-  const handleSearch = (event) => {
-    const query = event.target.value;
+  const handleSearch = (e) => {
+    const query = e.target.value;
     setSearchQuery(query);
-
     if (query.length > 0) {
       const filteredSuggestions = sampleProducts.filter(product =>
         product.name.toLowerCase().includes(query.toLowerCase())
@@ -22,12 +23,16 @@ function Home({ cart = [], setCart }) {
   };
 
   const handleAddToCart = (product) => {
-    setCart((prevCart) => [...prevCart, product]);
+    setCart([...cart, product]);
   };
 
   const filteredProducts = sampleProducts.filter(product =>
     product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const viewDetails = (id) => {
+    navigate(`/product/${id}`);
+  };
 
   return (
     <div className="home-container">
@@ -55,7 +60,7 @@ function Home({ cart = [], setCart }) {
       <div className="product-list">
         {filteredProducts.map(product => (
           <div key={product.id} className="product-item">
-            <div className="product-image">
+            <div className="product-image" onClick={() => viewDetails(product.id)} style={{ cursor: 'pointer' }}>
               <img src={product.image} alt={product.name} />
             </div>
             <div className="product-details">

@@ -47,47 +47,59 @@
 }
 
 .remove-button:hover {
-  background-color: #cc0000;
+  background-color: #ff1a1a;
 }
 
-.error-message {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
+.product-info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-.checkout-button {
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.product-name {
+  font-size: 14px;
+  text-align: center;
+}
+
+.proceed-button {
   display: block;
   width: 100%;
-  padding: 15px;
-  background-color: #007bff;
+  max-width: 300px;
+  margin: 20px auto;
+  padding: 15px 20px;
+  background-color: #28a745;
   color: white;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
   font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.checkout-button:hover {
-  background-color: #0056b3;
+.proceed-button:hover {
+  background-color: #218838;
 }
 
-/* Responsive Styles */
 @media (max-width: 768px) {
   .cart-table th, .cart-table td {
-    padding: 8px;
+    padding: 5px;
   }
 
-  .cart-table th {
-    font-size: 14px;
+  .product-image {
+    width: 80px;
+    height: 80px;
   }
 
-  .cart-table td {
-    font-size: 14px;
-  }
-
-  .checkout-button {
-    font-size: 14px;
-    padding: 12px;
+  .product-name {
+    font-size: 12px;
   }
 }

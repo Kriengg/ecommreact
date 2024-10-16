@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/Header.css'; // Import the CSS file
 import aboutUsIcon from '../images/about-us-icon.png'; // Import the About Us icon
 import avatar from '../images/avatar.png';
@@ -8,16 +8,19 @@ import homeIcon from '../images/home-icon.png';
 import logo from '../images/logo.png';
 import orderHistoryIcon from '../images/order-history-icon.png';
 
-function Header({ cart }) {
+function Header({ cart, isLoggedIn, setIsLoggedIn }) {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handleProfileClick = () => {
-    // Handle profile click
+    navigate('/profile');
   };
 
   const handleLogoutClick = () => {
-    // Handle logout click
+    setIsLoggedIn(false);
+    setDropdownVisible(false);
+    navigate('/login');
   };
 
   const handleNavLinkClick = () => {
@@ -49,16 +52,23 @@ function Header({ cart }) {
             <img src={cartIcon} alt="Cart" className="nav-icon" />
             <span className="cart-count">{cart.length}</span>
           </Link>
-        </nav>
-        <div className="user-profile" onClick={() => setDropdownVisible(!dropdownVisible)}>
-          <img src={avatar} alt="User Avatar" className="user-avatar" />
-          {dropdownVisible && (
-            <div className="dropdown-menu">
-              <div className="dropdown-item" onClick={handleProfileClick}>Profile</div>
-              <div className="dropdown-item" onClick={handleLogoutClick}>Logout</div>
-            </div>
+          {!isLoggedIn && (
+            <Link to="/login" className="nav-link" onClick={handleNavLinkClick}>
+              Login
+            </Link>
           )}
-        </div>
+        </nav>
+        {isLoggedIn && (
+          <div className="user-profile" onClick={() => setDropdownVisible(!dropdownVisible)}>
+            <img src={avatar} alt="User Avatar" className="user-avatar" />
+            {dropdownVisible && (
+              <div className="dropdown-menu">
+                <div className="dropdown-item" onClick={handleProfileClick}>Profile</div>
+                <div className="dropdown-item" onClick={handleLogoutClick}>Logout</div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <nav className={`side-panel ${menuVisible ? 'visible' : ''}`}>
         <Link to="/" className="nav-link" onClick={handleNavLinkClick}>

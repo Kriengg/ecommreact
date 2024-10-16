@@ -1,0 +1,35 @@
+/* src/css/ProductDetail.css */
+.product-detail {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  margin: 20px;
+  text-align: center;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-bottom: 20px;
+  cursor: zoom-in;
+}
+
+.product-detail h2 {
+  margin-bottom: 10px;
+}
+
+.product-detail p {
+  margin: 5px 0;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.availability {
+  font-size: 16px;
+  color: green;
+}
